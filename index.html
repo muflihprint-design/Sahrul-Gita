@@ -10,12 +10,10 @@
         :root {
             --maroon: #800000;
             --gold: #d4af37;
-            --bright-gold: #ffdf00; 
             --black: #1a1a1a;
             --cream: #f9f3e6;
         }
         
-        /* Reset universal untuk mencegah overflow */
         *, ::before, ::after {
             box-sizing: border-box;
         }
@@ -37,7 +35,7 @@
             height: 100dvh;
             width: 100%;
             overflow-y: auto;
-            overflow-x: hidden; /* Tambahan kunci */
+            overflow-x: hidden;
             scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -57,14 +55,15 @@
             flex-direction: column;
             justify-content: center;
             position: relative;
-            overflow: hidden; /* Mencegah konten di dalam section meluap ke samping */
+            overflow: hidden;
         }
 
         .font-serif { font-family: 'Playfair Display', serif; }
         .font-accent { font-family: 'Great Vibes', cursive; }
         
+        /* Gaya Hero */
         .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.65)), url('https://lh3.googleusercontent.com/d/19DyX_mO50hiOvj-19rchfR-o0HgGD2af');
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/muflihprint-design/Sahrul-Gita/main/ChatGPT%20Image%20Mar%2016%2C%202026%2C%2008_00_00%20AM.png');
             background-size: cover;
             background-position: center;
             height: 100dvh;
@@ -74,33 +73,53 @@
             z-index: 10;
         }
 
+        /* Animasi */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .hero-name {
-            font-size: clamp(3rem, 15vw, 5rem);
+            font-size: clamp(3.5rem, 15vw, 5.5rem);
             line-height: 0.9;
             display: block;
         }
         
         .hero-ampersand {
-            font-size: clamp(1.5rem, 8vw, 2.5rem);
-            margin: 0.2rem 0;
+            font-size: clamp(1.5rem, 6vw, 2.2rem); 
+            margin: -0.8rem 0;
             display: block;
+            color: var(--gold);
+            position: relative;
+            z-index: 2;
+            /* Menggeser simbol ke kanan sedikit */
+            transform: translateX(12px);
         }
 
         .date-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
+            gap: 1rem;
+            margin-top: 1.5rem; 
         }
         .date-line {
             height: 1px;
-            width: 30px;
+            width: 40px;
             background: var(--gold);
         }
 
+        /* Latar Belakang Overlay */
         .bg-page-overlay {
-            background: linear-gradient(rgba(249, 243, 230, 0.9), rgba(249, 243, 230, 0.9)), url('https://lh3.googleusercontent.com/d/19DyX_mO50hiOvj-19rchfR-o0HgGD2af');
+            background: linear-gradient(rgba(249, 243, 230, 0.92), rgba(249, 243, 230, 0.92)), url('https://raw.githubusercontent.com/muflihprint-design/Sahrul-Gita/main/ChatGPT%20Image%20Mar%2016%2C%202026%2C%2008_00_00%20AM.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -108,100 +127,65 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid var(--gold);
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            backdrop-filter: blur(5px);
-            max-width: 100%; /* Pastikan kartu tidak lebih lebar dari layar */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
         }
 
-     .name-wrapper {
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding: 12px 10px; /* Padding atas-bawah sedikit diperbesar, kiri-kanan dijaga */
-    display: block; /* Diubah dari inline-block ke block agar mengambil lebar penuh */
-    margin-bottom: 0.5rem;
-    background: rgba(255, 255, 255, 0.3);
-    width: 100%; /* Memaksa kontainer memenuhi lebar induk */
-    max-width: 100%; /* Menghapus batasan 90% */
-}
+        .name-wrapper {
+            border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
+            padding: 15px 10px;
+            background: rgba(255, 255, 255, 0.4);
+            margin-bottom: 0.5rem;
+        }
 
         .family-name-border {
             border: 1px solid var(--gold);
-            padding: 10px 15px;
-            display: block;
-            width: 100%;
-            max-width: 280px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.4);
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.5);
+            max-width: 300px;
+            margin: 0.5rem auto;
         }
 
-        .invited-card {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: left;
-            backdrop-filter: blur(4px);
-            width: 100%;
-        }
-
-        .invited-item {
-            border-bottom: 1px dashed rgba(212, 175, 55, 0.2);
-            padding: 6px 0;
-            font-size: 13px;
-        }
-
-        /* --- Animasi --- */
         .reveal {
             opacity: 0;
-             transition: all 3.5s cubic-bezier(0.22, 1, 0.36, 1); 
             will-change: transform, opacity;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        /* Kurangi offset animasi agar tidak memicu overflow di layar kecil */
-        .reveal-up { transform: translateY(100px); }
-        .reveal-down { transform: translateY(-100px); }
-        .reveal-left { transform: translateX(-100px); }
-        .reveal-right { transform: translateX(100px); }
-        .reveal-zoom { transform: scale(0.9); }
+        .reveal-up { transform: translateY(60px); }
+        .reveal-down { transform: translateY(-60px); }
+        .reveal-left { transform: translateX(-60px); }
+        .reveal-right { transform: translateX(60px); }
+        .reveal-zoom { transform: scale(0.8); }
 
         .reveal.active {
-            opacity: 1;
-            transform: translate(0, 0) scale(1);
+            opacity: 1 !important;
+            transform: translate(0, 0) scale(1) !important;
         }
 
-           .reveal:not(.active) {
-            transition: all 1.5s ease-in-out;
-        }
-        
         .btn-makassar {
-    /* 0.6 adalah tingkat transparansi (60%). Silakan ubah angka ini sesuai selera */
-    background-color: rgba(128, 0, 0, 0.6); 
-    
-    /* Agar terlihat mewah, tambahkan backdrop-blur */
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    
-    color: var(--gold);
-    padding: 12px 30px;
-    border: 2px solid var(--gold);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+            background-color: rgba(128, 0, 0, 0.7); 
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            color: var(--gold);
+            padding: 14px 36px;
+            border: 2px solid var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 11px;
+            transition: all 0.4s ease;
+            border-radius: 2px;
+        }
 
-/* Efek saat tombol ditekan agar terasa lebih responsif */
-.btn-makassar:active { 
-    transform: scale(0.95);
-    background-color: rgba(128, 0, 0, 0.8); 
-}
-
-        .btn-makassar:active { transform: scale(0.95); }
+        .btn-makassar:hover {
+            background-color: rgba(128, 0, 0, 1);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
 
         #leaf-container {
             position: fixed;
@@ -209,19 +193,30 @@
             pointer-events: none;
             z-index: 5;
             display: none;
-            overflow: hidden;
         }
         .leaf {
             position: absolute;
             color: var(--gold);
-            opacity: 0.4;
+            opacity: 0.5;
             animation: fall linear infinite;
         }
         @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+            15% { opacity: 0.6; }
+            85% { opacity: 0.6; }
+            100% { transform: translateY(110vh) rotate(720deg) translateX(50px); opacity: 0; }
+        }
+
+        .music-bar {
+            width: 3px;
+            height: 15px;
+            background: var(--gold);
+            margin: 0 1px;
+            animation: barHeight 0.8s ease-in-out infinite alternate;
+        }
+        @keyframes barHeight {
+            from { height: 5px; }
+            to { height: 20px; }
         }
     </style>
 </head>
@@ -231,8 +226,13 @@
     <source src="Muad - Perfect (Vocals Only Cover) (mp3cut.net).mp3" type="audio/mpeg">
 </audio>
 
-<div id="musicControl" class="fixed bottom-6 right-6 z-50 hidden">
-    <button onclick="toggleMusic()" class="bg-[#800000] text-[#d4af37] p-3 rounded-full shadow-lg border-2 border-[#d4af37] flex items-center justify-center">
+<div id="musicControl" class="fixed bottom-6 right-6 z-50 hidden flex items-center gap-2">
+    <div id="musicBars" class="flex items-end h-6 opacity-0 transition-opacity duration-500">
+        <div class="music-bar" style="animation-delay: 0.1s"></div>
+        <div class="music-bar" style="animation-delay: 0.3s"></div>
+        <div class="music-bar" style="animation-delay: 0.2s"></div>
+    </div>
+    <button onclick="toggleMusic()" class="bg-[#800000] text-[#d4af37] p-3 rounded-full shadow-lg border-2 border-[#d4af37] flex items-center justify-center transition-transform hover:scale-110">
         <svg id="musicIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <path id="musicPath" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
         </svg>
@@ -241,25 +241,29 @@
 
 <div id="leaf-container"></div>
 
-<div class="snap-container">
+<div class="snap-container" id="mainSnap">
     
-    <!-- Hero Section -->
+    <!-- Bagian Hero -->
     <section id="hero" class="hero-section px-4">
         <div class="z-10 w-full text-center">
-            <p class="text-[#d4af37] tracking-[0.4em] uppercase text-[10px] mb-2 opacity-90 reveal reveal-down" 
-           style="transform: translateY(-30px);"> THE WEDDING OF
-        </p>
-            <div class="font-accent text-[#d4af37] drop-shadow-md">
-                <span class="hero-name reveal reveal-left" style="transform: translateX(-10px);">Sahrul</span>
-              <span class="hero-ampersand reveal reveal-zoom" style="transform: translateY(-10px);">&</span>
-                <span class="hero-name reveal reveal-right">Gita</span>
+            <!-- Teks "THE WEDDING OF" dinaikkan lebih jauh lagi dengan margin negatif -->
+            <p class="text-[#d4af37] tracking-[0.5em] uppercase text-[11px] mb-8 mt-[-300px] fade-in-up" style="animation-delay: 0.3s;">
+                THE WEDDING OF
+            </p>
+
+            <div class="font-accent text-[#d4af37] drop-shadow-lg">
+                <span class="hero-name fade-in-up" style="animation-delay: 0.6s;">Sahrul</span>
+                <span class="hero-ampersand fade-in-up" style="animation-delay: 0.9s;">&</span>
+                <span class="hero-name fade-in-up" style="animation-delay: 1.2s;">Gita</span>
             </div>
-            <div class="date-container reveal reveal-up">
+
+            <div class="date-container fade-in-up" style="animation-delay: 1.5s;">
                 <div class="date-line"></div>
-                <p class="font-serif text-[12px] tracking-[0.2em] text-white">05 . 04 . 2026</p>
+                <p class="font-serif text-[13px] tracking-[0.3em] text-white">05 . 04 . 2026</p>
                 <div class="date-line"></div>
             </div>
-            <div class="mt-10 reveal reveal-up">
+
+            <div class="mt-12 fade-in-up" style="animation-delay: 1.8s;">
                 <button id="btnBuka" class="btn-makassar">Buka Undangan</button>
             </div>
         </div>
@@ -267,221 +271,209 @@
 
     <div class="bg-page-overlay">
         
-        <!-- Intro Section -->
+        <!-- Bagian Intro -->
         <section id="intro" class="py-12 px-6 text-center">
             <div class="reveal reveal-down">
                 <p class="font-serif italic text-sm mb-2 text-gray-600">Bismillahirrahmanirrahim</p>
-                <h2 class="text-[#800000] font-bold tracking-[0.2em] mb-8 text-[11px] uppercase">Assalamu’alaikum Warahmatullahi Wabarakatuh</h2>
+                <h2 class="text-[#800000] font-bold tracking-[0.2em] mb-10 text-[11px] uppercase">Assalamu’alaikum Warahmatullahi Wabarakatuh</h2>
             </div>
-            <div class="reveal reveal-zoom mb-6 bg-white/60 backdrop-blur-sm p-6 rounded-lg border border-[#d4af37]/20 mx-auto max-w-sm">
-                <p class="font-serif text-gray-700 italic text-[13px] leading-relaxed">
+            
+            <div class="reveal reveal-zoom mb-8 bg-white/70 backdrop-blur-md p-8 rounded-xl border border-[#d4af37]/30 mx-auto max-w-sm shadow-sm">
+                <p class="font-serif text-gray-700 italic text-[14px] leading-relaxed">
                     "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."
                 </p>
-                <p class="mt-4 font-bold text-[#800000] text-[10px] tracking-widest">— QS. AR-RUM: 21 —</p>
+                <p class="mt-5 font-bold text-[#800000] text-[11px] tracking-widest">— QS. AR-RUM: 21 —</p>
             </div>
+
             <div class="reveal reveal-up">
-                <p class="text-gray-800 font-medium text-[13px] leading-relaxed max-w-xs mx-auto">
+                <p class="text-gray-800 font-medium text-[14px] leading-relaxed max-w-xs mx-auto">
                     Dengan memohon rahmat dan ridha Allah Subhanahu wa Ta'ala, kami mengundang Bapak/Ibu/Saudara(i) untuk menghadiri acara pernikahan putra-putri kami:
                 </p>
             </div>
         </section>
 
-        <!-- Mempelai Section -->
+        <!-- Bagian Mempelai -->
         <section id="mempelai" class="py-16 px-6 text-center">
-            <div class="space-y-12">
+            <div class="space-y-16">
                 <div class="reveal reveal-left">
-                    <div class="name-wrapper mb-2">
-              <h3 class="font-serif text-2xl md:text-4xl font-bold text-[#800000]">Sahrul Gunawan, S.Ak</h3>
-            </div>
-                    <p class="text-[10px] text-[#d4af37] font-bold italic mb-4 tracking-[0.3em]">SAHRUL</p>
-                    <div class="text-[12px] text-gray-700">
+                    <div class="name-wrapper shadow-sm">
+                        <h3 class="font-serif text-3xl md:text-4xl font-bold text-[#800000]">Sahrul Gunawan, S.Ak</h3>
+                    </div>
+                    <p class="text-[10px] text-[#d4af37] font-bold italic mb-4 tracking-[0.4em]">SAHRUL</p>
+                    <div class="text-[13px] text-gray-700">
                         <p>Anak pertama dari</p>
-                        <p class="font-bold text-gray-900 text-[14px] mt-1">Bapak Manggasalim & Ibu Hj. Kasriana</p>
+                        <p class="font-bold text-gray-900 text-[15px] mt-2">Bapak Manggasalim & Ibu Hj. Kasriana</p>
                     </div>
                 </div>
                 
-                <div class="text-[#d4af37] text-3xl font-serif reveal reveal-zoom">᨞</div>
+                <div class="text-[#d4af37] text-4xl font-serif reveal reveal-zoom">᨞</div>
                 
                 <div class="reveal reveal-right">
-                    <div class="name-wrapper mb-2">
-                <h3 class="font-serif text-2xl md:text-4xl font-bold text-[#800000]">Gita Irawanda, M.Pd</h3>
-            </div>
-                    <p class="text-[10px] text-[#d4af37] font-bold italic mb-4 tracking-[0.3em]">GITA</p>
-                    <div class="text-[12px] text-gray-700">
+                    <div class="name-wrapper shadow-sm">
+                        <h3 class="font-serif text-3xl md:text-4xl font-bold text-[#800000]">Gita Irawanda, M.Pd</h3>
+                    </div>
+                    <p class="text-[10px] text-[#d4af37] font-bold italic mb-4 tracking-[0.4em]">GITA</p>
+                    <div class="text-[13px] text-gray-700">
                         <p>Anak kedua dari</p>
-                        <p class="font-bold text-gray-900 text-[14px] mt-1">Bapak Amang Baco, S.H & Ibu Suriati AN</p>
+                        <p class="font-bold text-gray-900 text-[15px] mt-2">Bapak Amang Baco, S.H & Ibu Suriati AN</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Acara Section -->
+        <!-- Bagian Acara -->
         <section id="acara" class="py-12 px-4">
             <div class="text-center">
-                <div class="reveal reveal-down mb-8">
-                    <h3 class="font-serif text-[10px] tracking-[0.3em] text-[#800000]/80 uppercase font-bold">Waktu & Tempat</h3>
+                <div class="reveal reveal-down mb-10">
+                    <h3 class="font-serif text-[11px] tracking-[0.4em] text-[#800000]/80 uppercase font-bold">Waktu & Tempat</h3>
                 </div>
-                <div class="grid grid-cols-1 gap-6 max-w-xs mx-auto">
-                    <div class="card p-6 text-black reveal reveal-left">
-                        <h4 class="font-serif text-lg text-[#800000] border-b border-[#d4af37]/30 pb-2 mb-4 uppercase tracking-tighter">Akad Nikah</h4>
-                        <div class="space-y-2 text-sm">
-                            <p class="font-bold">Sabtu, 04 April 2026</p>
-                            <p class="text-[#800000] font-semibold">Pukul 11.00 Wita</p>
-                            <div class="h-[1px] bg-[#d4af37]/20 my-3"></div>
-                            <p class="text-[12px] leading-relaxed text-gray-600">Jl. Tinumbu No.164B<br>Kota Makassar</p>
+                <div class="grid grid-cols-1 gap-8 max-w-xs mx-auto">
+                    <div class="card p-8 reveal reveal-left">
+                        <h4 class="font-serif text-xl text-[#800000] border-b-2 border-[#d4af37]/30 pb-3 mb-5 uppercase tracking-tighter">Akad Nikah</h4>
+                        <div class="space-y-3 text-sm">
+                            <p class="font-bold text-gray-800">Sabtu, 04 April 2026</p>
+                            <p class="text-[#800000] font-semibold text-base">Pukul 11.00 Wita</p>
+                            <div class="h-[1px] bg-[#d4af37]/30 my-4"></div>
+                            <p class="text-[13px] leading-relaxed text-gray-600">Jl. Tinumbu No.164B<br>Kota Makassar</p>
                         </div>
                     </div>
-                    <div class="card p-6 text-black reveal reveal-right">
-                        <h4 class="font-serif text-lg text-[#800000] border-b border-[#d4af37]/30 pb-2 mb-4 uppercase tracking-tighter">Resepsi</h4>
-                        <div class="space-y-2 text-sm">
-                            <p class="font-bold">Ahad, 05 April 2026</p>
-                            <p class="text-[#800000] font-semibold">Pukul 11.00 Wita - Selesai</p>
-                            <div class="h-[1px] bg-[#d4af37]/20 my-3"></div>
-                            <p class="text-[12px] leading-relaxed text-gray-600">Jl. Kalampang, Segeri<br>Kabupaten Pangkep</p>
+                    
+                    <div class="card p-8 reveal reveal-right">
+                        <h4 class="font-serif text-xl text-[#800000] border-b-2 border-[#d4af37]/30 pb-3 mb-5 uppercase tracking-tighter">Resepsi</h4>
+                        <div class="space-y-3 text-sm">
+                            <p class="font-bold text-gray-800">Ahad, 05 April 2026</p>
+                            <p class="text-[#800000] font-semibold text-base">Pukul 11.00 Wita - Selesai</p>
+                            <div class="h-[1px] bg-[#d4af37]/30 my-4"></div>
+                            <p class="text-[13px] leading-relaxed text-gray-600">Jl. Kalampang, Segeri<br>Kabupaten Pangkep</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Keluarga Section -->
+        <!-- Bagian Keluarga -->
         <section id="keluarga" class="py-16 px-6 text-center">
             <div class="max-w-md mx-auto">
-                <div class="reveal reveal-up mb-12">
-                    <p class="font-serif italic text-[13px] leading-relaxed text-gray-800 mb-6 font-medium">
+                <div class="reveal reveal-up mb-14">
+                    <p class="font-serif italic text-[14px] leading-relaxed text-gray-800 mb-8 font-medium">
                         Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara(i) berkenan hadir dan memberikan do’a restu kepada kedua mempelai.
                     </p>
-                    <p class="font-bold text-[#800000] uppercase tracking-widest text-[11px]">Wassalamu’alaikum Warahmatullahi Wabarakatuh</p>
+                    <p class="font-bold text-[#800000] uppercase tracking-[0.2em] text-[11px]">Wassalamu’alaikum Warahmatullahi Wabarakatuh</p>
                 </div>
-                <div class="reveal reveal-up mb-12">
-                    <h3 class="font-serif text-[10px] mb-8 tracking-[0.3em] text-[#800000]/80 uppercase font-bold">Hormat Kami Yang Mengundang</h3>
+                
+                <div class="reveal reveal-up">
+                    <h3 class="font-serif text-[11px] mb-8 tracking-[0.4em] text-[#800000]/80 uppercase font-bold">Hormat Kami Yang Mengundang</h3>
                     <div class="space-y-4">
-                        <div class="family-name-border reveal reveal-left">
-                            <p class="font-serif text-md font-bold text-[#800000]">Alm. H. M. Idris</p>
-                            <p class="font-serif text-md font-bold text-[#800000]">& Hj. Ratiga Aras</p>
+                        <div class="family-name-border reveal reveal-left shadow-sm">
+                            <p class="font-serif text-lg font-bold text-[#800000]">Alm. H. M. Idris</p>
+                            <p class="font-serif text-lg font-bold text-[#800000]">& Hj. Ratiga Aras</p>
                         </div>
-                        <div class="family-name-border reveal reveal-right">
-                            <p class="font-serif text-md font-bold text-[#800000]">Manggasalim H.N</p>
-                            <p class="font-serif text-md font-bold text-[#800000]">& Hj. Kasriana H.I</p>
+                        <div class="family-name-border reveal reveal-right shadow-sm">
+                            <p class="font-serif text-lg font-bold text-[#800000]">Manggasalim H.N</p>
+                            <p class="font-serif text-lg font-bold text-[#800000]">& Hj. Kasriana H.I</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Turut Mengundang -->
-        <section id="turut-mengundang" class="py-16 px-6 text-center">
-            <div class="reveal reveal-down">
-                <h3 class="font-serif text-[10px] mb-6 tracking-[0.3em] text-[#800000]/80 uppercase font-bold">Turut Mengundang</h3>
-                <div class="grid grid-cols-1 gap-4 max-w-sm mx-auto">
-                    <div class="invited-card reveal reveal-left">
-                        <div class="invited-item">Haeruddin & Rabbia Aras</div>
-                        <div class="invited-item">H. Ridwan H.I & Hj. Rapika</div>
-                        <div class="invited-item">M. Asri & Kasmawati H.I</div>
-                        <div class="invited-item">Lukman & Kasriani H.I</div>
-                        <div class="invited-item">M. Takbir & Kasnidar, S.Sos</div>
-                    </div>
-                    <div class="invited-card reveal reveal-right">
-                        <div class="invited-item">H. Abd. Salam & Hj. Dawiah</div>
-                        <div class="invited-item">H. Muhlis & Hj. Saodah, H.N</div>
-                        <div class="invited-item">H. Abdullah & Hj. Patimang</div>
-                        <div class="invited-item">H. Abd. Gaffar & Hj. St. Rilla</div>
-                        <div class="invited-item">H. Musawwir & H. Bukrana</div>
-                    </div>
+        <footer class="py-12 text-center bg-white/30 backdrop-blur-sm">
+            <div class="flex flex-col items-center px-6">
+                <div class="w-32 h-32 mb-2 reveal reveal-zoom">
+                    <img src="https://lh3.googleusercontent.com/d/10him4crwdN3efFbjkvsphTRmxGL_lxTB" alt="Logo Muflih Print" class="w-full h-full object-contain brightness-110 drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]">
                 </div>
-            </div>
-        </section>
-
-        <!-- Halaman Footer -->
-    <footer class="py-10 text-white text-center">
-        <div class="flex flex-col items-center px-6 h-full justify-center">
-            <div class="w-40 h-40 mb-0 reveal reveal-zoom">
-                <img src="https://lh3.googleusercontent.com/d/10him4crwdN3efFbjkvsphTRmxGL_lxTB" alt="Logo Muflih Print" class="w-full h-full object-contain brightness-125 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]" onerror="this.src='https://via.placeholder.com/150/000000/d4af37?text=Muflih+Print'">
-            </div>
-            
-            <span class="font-accent text-[#d4af37] text-2xl mb-1 -mt-4 reveal reveal-left">Muflih Print</span>
-           
-            <div class="reveal reveal-right mt-4 mb-3 bg-[#d4af37]/10 border border-[#d4af37]/30 rounded-lg px-4 py-3 backdrop-blur-sm shadow-[0_0_20px_rgba(212,175,55,0.1)] max-w-[280px] mx-auto">
-                <p class="text-[#d4af37] text-[11px] font-bold uppercase tracking-widest leading-tight">
-                    CETAK UNDANGAN IMPIANMU
-                </p>
-                <p class="text-[11px] text-gray-300 mt-2 italic leading-relaxed">
-                    "Pesan lebih awal untuk hasil maksimal & dapatkan promonya hari ini!"
-                </p>
-            </div>
-
-    <a href="https://wa.link/231dzo" target="_blank" class="reveal reveal-zoom border border-[#d4af37]/40 rounded-full px-8 py-3 flex flex-col items-center hover:bg-[#d4af37]/20">
-                <span class="text-[8px] uppercase tracking-widest opacity-60 mb-0.5">Hubungi Kami</span>
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5" style="fill: #d4af37;" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.7-16.6-14.8-27.8-33.1-31.1-38.6-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-                    <span class="text-sm font-bold tracking-widest text-[#d4af37]">0815 7400 9621</span>
+                <span class="font-serif font-bold italic text-[#800000] text-2xl mb-4 reveal reveal-left">Muflih Print</span>
+                <div class="reveal reveal-right mb-8 bg-white/80 border border-[#d4af37]/40 rounded-xl px-6 py-4 shadow-sm max-w-[300px]">
+                    <p class="text-[#800000] text-[12px] font-bold uppercase tracking-widest">Cetak Undangan Impianmu</p>
+                    <p class="text-[12px] text-gray-700 mt-2 italic font-medium">"Pesan lebih awal untuk hasil maksimal & dapatkan promonya hari ini!"</p>
                 </div>
-            </a>
-
-            <p class="text-[9px] opacity-30 uppercase tracking-[0.3em] mt-6">© 2026 Muflih Print Makassar</p>
-        </div>
-    </footer>
+                <a href="https://wa.link/231dzo" target="_blank" class="reveal reveal-zoom bg-[#800000] text-white rounded-full px-10 py-4 flex items-center gap-3 hover:scale-105 transition-transform shadow-lg">
+                    <svg class="w-5 h-5 fill-current text-[#d4af37]" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.7-16.6-14.8-27.8-33.1-31.1-38.6-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                    <span class="text-sm font-bold tracking-[0.2em]">0815 7400 9621</span>
+                </a>
+                <p class="text-[9px] text-gray-500 uppercase tracking-[0.3em] mt-12 pb-6">© 2026 Muflih Print Makassar</p>
+            </div>
+        </footer>
     </div>
 </div>
 
 <script>
     const audio = document.getElementById("bgMusic");
     const musicControl = document.getElementById("musicControl");
+    const musicBars = document.getElementById("musicBars");
     const leafContainer = document.getElementById("leaf-container");
+    const btnBuka = document.getElementById('btnBuka');
+    const snapContainer = document.querySelector('.snap-container');
 
+    // Efek Daun Berguguran
     function createLeaf() {
         if (leafContainer.style.display === "none") return;
         const leaf = document.createElement("div");
         leaf.className = "leaf";
-        leaf.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z" /></svg>`;
-        leaf.style.left = Math.random() * (window.innerWidth - 20) + "px";
-        leaf.style.animationDuration = (Math.random() * 3 + 5) + "s";
+        leaf.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z" /></svg>`;
+        const startLeft = Math.random() * window.innerWidth;
+        leaf.style.left = startLeft + "px";
+        leaf.style.animationDuration = (Math.random() * 4 + 6) + "s";
+        leaf.appendChild(leaf);
         leafContainer.appendChild(leaf);
-        setTimeout(() => leaf.remove(), 8000);
+        setTimeout(() => leaf.remove(), 10000);
     }
 
-    document.getElementById('btnBuka').addEventListener('click', function() {
+    // Tombol Buka Undangan
+    btnBuka.addEventListener('click', function() {
         document.body.classList.remove('locked');
         audio.play().then(() => {
             musicControl.classList.remove('hidden');
-        }).catch(() => {
-            musicControl.classList.remove('hidden');
+            musicBars.classList.add('opacity-100');
         });
-
         leafContainer.style.display = "block";
-        setInterval(createLeaf, 2000);
-
+        setInterval(createLeaf, 1500);
         document.getElementById('intro').scrollIntoView({ behavior: 'smooth' });
     });
 
+    // Kontrol Musik
     function toggleMusic() {
         const path = document.getElementById("musicPath");
         if (audio.paused) {
             audio.play();
+            musicBars.classList.add('opacity-100');
             path.setAttribute("d", "M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z");
         } else {
             audio.pause();
+            musicBars.classList.remove('opacity-100');
             path.setAttribute("d", "M6 19h4V5H6v14zm8-14v14h4V5h-4z");
         }
     }
 
-    const options = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
+    // Intersection Observer untuk Konten
+    const initScrollAnimations = () => {
+        const observerOptions = {
+            root: snapContainer, 
+            threshold: 0.1,      
+            rootMargin: "0px" 
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.target.closest('#hero')) return;
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    const box = entry.boundingClientRect;
+                    if (box.top > 0 || box.bottom < 0) {
+                        entry.target.classList.remove('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
     };
 
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-            } else {
-                // Opsional: hapus baris di bawah jika ingin animasi hanya sekali jalan
-                entry.target.classList.remove("active");
-            }
-        });
-    }, options);
-
-    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+    document.addEventListener('DOMContentLoaded', initScrollAnimations);
 </script>
 </body>
 </html>
