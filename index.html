@@ -59,6 +59,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+align-items: center;
+    overflow: hidden; /* Tambahkan ini */
             position: relative;
             background: linear-gradient(rgba(249, 243, 230, 0.85), rgba(249, 243, 230, 0.92)), var(--bg-image);
             background-size: cover;
@@ -175,18 +177,31 @@
             100% { transform: translateY(105vh) translateX(100px) rotate(360deg); opacity: 0; }
         }
 
-        /* --- ANIMASI REVEAL --- */
-        .reveal {
-            opacity: 0;
-            transition: all 3.5s cubic-bezier(0.22, 1, 0.36, 1); 
-            will-change: transform, opacity;
-        }
-        .reveal-up { transform: translateY(100px); }
-        .reveal-down { transform: translateY(-100px); }
-        .reveal-zoom { transform: scale(0.8); }
-        .reveal-left { transform: translateX(-100px); }
-        .reveal-right { transform: translateX(100px); }
-        .reveal.active { opacity: 1; transform: translate(0, 0) scale(1); }
+       /* --- ANIMASI REVEAL OPTIMIZED (3.5s) --- */
+.reveal {
+    opacity: 0;
+    /* Durasi tetap 3.5 detik sesuai permintaan */
+    transition: opacity 3.5s cubic-bezier(0.22, 1, 0.36, 1), 
+                transform 3.5s cubic-bezier(0.22, 1, 0.36, 1);
+    
+    /* Penting: Memaksa GPU agar animasi lambat tidak bergetar/jitter */
+    will-change: transform, opacity;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Jarak gerak diperhalus agar transisi 3.5 detik tidak terasa membosankan */
+.reveal-up { transform: translate3d(0, 60px, 0); }
+.reveal-down { transform: translate3d(0, -60px, 0); }
+.reveal-zoom { transform: scale(0.85) translate3d(0, 0, 0); }
+.reveal-left { transform: translate3d(-60px, 0, 0); }
+.reveal-right { transform: translate3d(60px, 0, 0); }
+
+.reveal.active { 
+    opacity: 1; 
+    transform: translate3d(0, 0, 0) scale(1); 
+}
 
         .btn-makassar {
             background-color: rgba(212, 175, 55, 0.15);
@@ -353,29 +368,29 @@
     </section>
 
     <!-- Halaman 3: Mempelai -->
-    <section id="mempelai" class="px-6 text-center border-y border-[#d4af37]/30" style="justify-content: flex-start;">
-    <div class="space-y-6 py-4 mt-20 md:mt-32 w-full"> 
+  <section id="mempelai" class="px-6 text-center border-y border-[#d4af37]/30 overflow-hidden" style="justify-content: center !important;">
+    <div class="space-y-4 py-4 w-full max-w-md mx-auto"> 
         <div class="reveal reveal-left">
-            <div class="name-wrapper mb-1"> 
-                <h3 class="font-serif text-[22px] font-bold text-var(--maroon)" style="color: var(--maroon);">Sahrul Gunawan, S.Ak</h3> 
+            <div class="name-wrapper !py-2 mb-1"> 
+                <h3 class="font-serif text-[22px] md:text-[32px] font-bold text-var(--maroon)" style="color: var(--maroon);">Sahrul Gunawan, S.Ak</h3> 
             </div>
-            <p class="text-[9px] text-gray-500 font-bold italic mb-3 tracking-[0.3em]">SAHRUL</p>
-            <div class="text-[12px] text-gray-700">
+            <p class="text-[8px] text-gray-500 font-bold italic mb-2 tracking-[0.3em]">SAHRUL</p>
+            <div class="text-[11px] text-gray-700">
                 <p>Anak pertama dari</p>
-                <p class="font-bold text-gray-900 text-[14px] mt-1">Bapak Manggasalim & Ibu Hj. Kasriiana</p>
+                <p class="font-bold text-gray-900 text-[12px] mt-0.5">Bapak Manggasalim & Ibu Hj. Kasriana</p>
             </div>
         </div>
         
-        <div class="ampersand-divider font-serif reveal reveal-zoom !my-4 !text-[2.5rem] italic"> & </div>
+        <div class="ampersand-divider font-serif reveal reveal-zoom !my-1 !text-[1.5rem] italic opacity-70"> & </div>
         
         <div class="reveal reveal-right">
-            <div class="name-wrapper mb-1"> 
-                <h3 class="font-serif text-[22px] font-bold text-var(--maroon)" style="color: var(--maroon);">Gita Irawanda, M.Pd</h3> 
+            <div class="name-wrapper !py-2 mb-1"> 
+                <h3 class="font-serif text-[22px] md:text-[32px] font-bold text-var(--maroon)" style="color: var(--maroon);">Gita Irawanda, M.Pd</h3> 
             </div>                
-            <p class="text-[9px] text-gray-500 font-bold italic mb-1 tracking-[0.3em]">GITA</p>
-            <div class="text-[12px] text-gray-700">
+            <p class="text-[8px] text-gray-500 font-bold italic mb-1 tracking-[0.3em]">GITA</p>
+            <div class="text-[11px] text-gray-700">
                 <p>Anak kedua dari</p>
-                <p class="font-bold text-gray-900 text-[14px] mt-1">Bapak Amang Baco, S.H & Ibu Suriati AN</p>
+                <p class="font-bold text-gray-900 text-[12px] mt-0.5">Bapak Amang Baco, S.H & Ibu Suriati AN</p>
             </div>
         </div>
     </div>
@@ -591,24 +606,32 @@
         }
     }
 
-    const options = { 
-    threshold: 0.5, // Hanya aktif jika 50% halaman sudah terlihat
-    rootMargin: "-10% 0px -10% 0px" // Memberi jeda aman di atas dan bawah layar
+// Pengaturan agar elemen muncul lebih cepat saat di-scroll
+const options = { 
+    threshold: 0.2, // Mulai animasi ketika 20% elemen terlihat
+    rootMargin: "0px 0px -50px 0px" // Memberi jeda agar tidak langsung terpotong layar bawah
 };
 
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-            } else {
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+        } else {
+            // Logika agar animasi tidak langsung hilang saat scroll ke atas sedikit
+            // Ini menjaga durasi 3.5s tetap elegan
+            if (entry.boundingClientRect.top > window.innerHeight || entry.boundingClientRect.bottom < 0) {
                 entry.target.classList.remove("active");
             }
-        });
-    }, options);
-
-    document.querySelectorAll(".reveal").forEach(el => {
-        revealObserver.observe(el);
+        }
     });
+}, options);
+
+document.querySelectorAll(".reveal").forEach(el => {
+    revealObserver.observe(el);
+}); 
+
+
+
 </script>
 </body>
 </html>
