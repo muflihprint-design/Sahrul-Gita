@@ -592,9 +592,9 @@
     }
 
     const options = { 
-        threshold: 0.15,
-        root: snapContainer
-    };
+    threshold: 0.5, // Hanya aktif jika 50% halaman sudah terlihat
+    rootMargin: "-10% 0px -10% 0px" // Memberi jeda aman di atas dan bawah layar
+};
 
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
